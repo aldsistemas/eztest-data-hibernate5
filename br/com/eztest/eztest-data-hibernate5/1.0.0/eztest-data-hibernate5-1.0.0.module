@@ -1,0 +1,116 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "br.com.eztest",
+    "module": "eztest-data-hibernate5",
+    "version": "1.0.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "eztest-data-hibernate5-1.0.0.jar",
+          "url": "eztest-data-hibernate5-1.0.0.jar",
+          "size": 9934,
+          "sha512": "db155c842638645a60b9faca5ca44bca2a8a405a9a85925d473bd7e7cd58999136f8386dc1a43defc7faeef6ecefcab59d95c470b0b536e1a90eb506d6a9ea88",
+          "sha256": "26bae052875513f25468ed2afff2ec159dbe01e526f71020bb59b3f17f09838c",
+          "sha1": "dcbfbb28791090ad1a60f58884c31830e12bac1e",
+          "md5": "17ee318d59ae8daebb1af76bd5a8afac"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "br.com.eztest",
+          "module": "eztest-data",
+          "version": {
+            "requires": "1.0.0"
+          }
+        },
+        {
+          "group": "org.hibernate",
+          "module": "hibernate-core",
+          "version": {
+            "requires": "5.6.15.Final"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "eztest-data-hibernate5-1.0.0.jar",
+          "url": "eztest-data-hibernate5-1.0.0.jar",
+          "size": 9934,
+          "sha512": "db155c842638645a60b9faca5ca44bca2a8a405a9a85925d473bd7e7cd58999136f8386dc1a43defc7faeef6ecefcab59d95c470b0b536e1a90eb506d6a9ea88",
+          "sha256": "26bae052875513f25468ed2afff2ec159dbe01e526f71020bb59b3f17f09838c",
+          "sha1": "dcbfbb28791090ad1a60f58884c31830e12bac1e",
+          "md5": "17ee318d59ae8daebb1af76bd5a8afac"
+        }
+      ]
+    },
+    {
+      "name": "javadocElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "javadoc",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "eztest-data-hibernate5-1.0.0-javadoc.jar",
+          "url": "eztest-data-hibernate5-1.0.0-javadoc.jar",
+          "size": 301173,
+          "sha512": "3061bd235bb28930d1a88b7088adc716e466b4dda3edc6a3d2b6abe5db7de1a4db001e515c4fb8adc01e2fa1ccef07645932099810e8c2e6f54d0d2e368f5773",
+          "sha256": "5fb6c2dadd5fa08fffebd0d3ca96458cdaa796c95a0b28f735282505696e25ca",
+          "sha1": "8696f45813f207ad2120f46c74084b659e836ed3",
+          "md5": "b8a4e4c06d091b54deffef4284325794"
+        }
+      ]
+    },
+    {
+      "name": "sourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "eztest-data-hibernate5-1.0.0-sources.jar",
+          "url": "eztest-data-hibernate5-1.0.0-sources.jar",
+          "size": 5727,
+          "sha512": "d3eabac04d2e3ef94b6f385da9b9258911ec63ab9c94733874c2581483980b3ef221d16e4a4dc7d647e7854cdf61525b7b138b18a0956a4965e859af201f66f6",
+          "sha256": "cd12ef84a26426b60213697dd8cace1a71a384e05945031b028b0eac1955e835",
+          "sha1": "fad2a394654a2fef3f9fe58b7f87ca8feb493948",
+          "md5": "e675edecc38c912462303e05b828c293"
+        }
+      ]
+    }
+  ]
+}
