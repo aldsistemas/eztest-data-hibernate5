@@ -1,0 +1,100 @@
+plugins {
+    id 'groovy'
+    id 'java-library'
+    id 'maven-publish'
+}
+rootProject.version = generateVersion();
+group = 'br.com.eztest'
+version = rootProject.version;
+
+def repoPassword = project.repoPassword
+
+repositories {
+    mavenCentral()
+    maven {url "https://raw.githubusercontent.com/aldsistemas/eztest-data/releases"}
+}
+
+dependencies {
+    implementation("br.com.eztest:eztest-data:1.0.0")
+    implementation 'org.hibernate:hibernate-core:5.6.15.Final'
+}
+
+test {
+    useJUnitPlatform()
+}
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
+def generateVersion() {
+    def props = new Properties()
+    def verFile = new File("${rootProject.projectDir}/version.properties")
+    def version = ""
+    if (verFile.exists()) {
+        verFile.withInputStream { props.load(it) }
+        def classifier = props['version.classifier']
+        version = props['version.major'] + '.' + props['version.minor']
+        def buildNumber = props['build.number']
+        def suffix = ''
+        if ('SNAPSHOT'.equals(classifier)) {
+            suffix = '-' + (new Date().format('yyyyMMdd_HHmm'))
+        } else if (buildNumber != null) {
+            suffix = '.' + buildNumber;
+        } else if (System.env['GO_PIPELINE_COUNTER']) {
+            suffix = '.' + System.env['GO_PIPELINE_COUNTER']
+        } else if (System.env['BITBUCKET_BUILD_NUMBER']) {
+            suffix = '.' + System.env['BITBUCKET_BUILD_NUMBER']
+        } else if (System.env['ARTIFACT_BUILD_NUMBER']) {
+            suffix = '.' + System.env['ARTIFACT_BUILD_NUMBER']
+        } else if (System.env['BUILD_NUMBER']) {
+            suffix = '.' + System.env['BUILD_NUMBER']
+        }
+        version += suffix
+    } else {
+        println "[WARN] Version unknown. Create version.properties with version.major, version.minor, version.classifier properties."
+    }
+    version
+}
+
+processResources.doLast {
+    writeFile(new File("${buildDir}/resources/main/VERSION"), rootProject.version)
+    writeFile(new File("${projectDir}/VERSION"), rootProject.version)
+}
+
+def writeFile(file, content) {
+    file.getParentFile().mkdirs()
+    file.createNewFile()
+    file.withOutputStream { it << content }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = "br.com.eztest"
+            artifactId = 'eztest-data-hibernate5'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'Eztest Core'
+                description = 'Eztest Core'
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
